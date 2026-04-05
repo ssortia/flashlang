@@ -13,7 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **monorepo template** for full-stack projects using NestJS (API) + Next.js (web) with shadcn/ui. It is a starter template — the goal is to scaffold a production-ready foundation, not a running application.
+**Flashlang** — веб-сервис для изучения английского языка. Пользователь добавляет тексты, читает их в интерактивном ридере (клик на слово → перевод из словаря, выделение фразы → MyMemory API), накапливает персональный словарь со шкалой знания 0–5 и тренирует слова через флеш-карточки.
 
 ## Monorepo Tooling
 
@@ -24,35 +24,35 @@ This is a **monorepo template** for full-stack projects using NestJS (API) + Nex
 ## Common Commands
 
 ```bash
-# Install all dependencies
+# Установить зависимости
 pnpm install
 
-# Start all apps in dev mode
+# Запустить всё в dev-режиме
 pnpm dev
 
-# Build all packages and apps
+# Сборка всех пакетов
 pnpm build
 
-# Lint entire monorepo
+# Линтинг монорепо
 pnpm lint
 
-# Type-check entire monorepo
+# Проверка типов
 pnpm typecheck
 
-# Run all tests
+# Тесты
 pnpm test
 
-# Run tests for a single package (from root)
+# Тесты конкретного пакета
 pnpm --filter @repo/web test
 pnpm --filter @repo/api test
 
-# Database
-pnpm --filter @repo/api db:generate  # generate Prisma Client
-pnpm --filter @repo/api db:migrate   # apply migrations
-pnpm --filter @repo/api db:seed      # seed the database
-pnpm --filter @repo/api db:studio    # open Prisma Studio
+# База данных
+pnpm --filter @repo/api db:generate  # сгенерировать Prisma Client
+pnpm --filter @repo/api db:migrate   # применить миграции
+pnpm --filter @repo/api db:seed      # заполнить тестовыми данными
+pnpm --filter @repo/api db:studio    # открыть Prisma Studio
 
-# Docker (local infrastructure: postgres, redis)
+# Docker (локальная инфраструктура: postgres)
 docker compose up -d
 docker compose down
 ```
@@ -62,10 +62,16 @@ docker compose down
 Полная структура проекта описана в `README.md`. Краткий обзор:
 
 - `apps/api` — NestJS backend (Fastify, SWC, JWT auth, Swagger)
+  - `src/texts/` — CRUD текстов
+  - `src/translation/` — прокси к MyMemory API
+  - `src/vocabulary/` — словарь пользователя
+  - `src/training/` — данные для тренировки флеш-карточками
 - `apps/web` — Next.js 15 frontend (App Router, next-auth v5, shadcn/ui)
-- `packages/` — общие пакеты: `ui`, `types`, `config/{eslint,typescript,prettier}`
+  - `src/app/(dashboard)/texts/` — список текстов и интерактивный ридер
+  - `src/app/(dashboard)/vocabulary/` — таблица словаря с фильтрами
+  - `src/app/(dashboard)/training/` — тренировка (флеш-карточки)
+- `packages/types` — общие Zod-схемы: `auth.ts` + `flashlang.ts`
 - `docker/` — Dockerfile-ы и nginx.conf
-- `.github/workflows/ci.yml` — CI: lint → typecheck → test → build
 
 ## Architecture Decisions
 
@@ -78,7 +84,7 @@ docker compose down
 - Health check at `/health`
 - Structured logging via `nestjs-pino`
 - Env validation via `zod` at startup
-- Module structure: `auth`, `users`, `prisma` (core modules pre-configured)
+- Module structure: `auth`, `users`, `prisma`, `texts`, `translation`, `vocabulary`, `training`
 
 ### Web (`apps/web`)
 
@@ -92,9 +98,15 @@ docker compose down
 - Auth: `next-auth` v5
 - UI components: shadcn/ui in `src/components/ui/`, utilities in `src/lib/utils.ts`
 
+### Flashlang-специфические решения
+
+- **Ридер**: токенизация текста на клиенте (`\w+` регулярка), одно слово → из локального словаря, фраза → `POST /translation` (ADR-010)
+- **Перевод**: MyMemory API через NestJS-прокси `/translation`, провайдер изолирован в `TranslationService` (ADR-011)
+- **Прогресс слова**: `knowledgeLevel: Int` 0–5, +1 за верный ответ на тренировке, -1 за неверный (ADR-012)
+
 ### Shared Packages
 
-- `@repo/types` — Zod schemas and TypeScript interfaces shared between API and web; the source of truth for data shapes
+- `@repo/types` — Zod-схемы: `auth.ts` (User, Tokens, Role) и `flashlang.ts` (Text, UserWord, Translation, Training)
 
 ### TypeScript
 
@@ -114,7 +126,6 @@ See `.env.example` at the root. Each app reads its own subset:
 | Variable                          | Used by |
 | --------------------------------- | ------- |
 | `DATABASE_URL`                    | api     |
-| `REDIS_URL`                       | api     |
 | `JWT_SECRET`, `JWT_EXPIRES_IN`    | api     |
 | `NEXTAUTH_SECRET`, `NEXTAUTH_URL` | web     |
 | `NEXT_PUBLIC_API_URL`             | web     |
