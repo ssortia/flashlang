@@ -10,7 +10,13 @@ vi.mock('@/hooks/use-training', () => ({
   useSubmitResult: vi.fn(),
 }));
 
+// Мок useWordSets — SetupScreen использует его для списка наборов
+vi.mock('@/hooks/use-word-sets', () => ({
+  useWordSets: vi.fn(),
+}));
+
 import { useSubmitResult, useTrainingWords } from '@/hooks/use-training';
+import { useWordSets } from '@/hooks/use-word-sets';
 
 // Тестовые слова
 const MOCK_WORDS: TrainingWord[] = [
@@ -35,6 +41,12 @@ beforeEach(() => {
   vi.mocked(useTrainingWords).mockReturnValue({
     refetch: makeRefetch(MOCK_WORDS),
   } as ReturnType<typeof useTrainingWords>);
+
+  // useWordSets нужен для SetupScreen — возвращаем пустой список в тестах контейнера
+  vi.mocked(useWordSets).mockReturnValue({
+    data: [],
+    isLoading: false,
+  } as ReturnType<typeof useWordSets>);
 
   vi.mocked(useSubmitResult).mockReturnValue({
     mutateAsync: makeMutateAsync(),

@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useSubmitResult, useTrainingWords } from '@/hooks/use-training';
 import type { TrainingWord } from '@repo/types';
 
+import { SetupScreen } from './setup-screen';
+
 // Типы экранов тренировки
 type Screen = 'setup' | 'training' | 'results';
 
@@ -16,11 +18,7 @@ interface TrainingSession {
   incorrect: number;
 }
 
-interface TrainingContentProps {
-  // Пропсы для будущих дочерних экранов (пробрасываются из контейнера)
-}
-
-export function TrainingContent(_props: TrainingContentProps) {
+export function TrainingContent() {
   // Текущий экран
   const [screen, setScreen] = useState<Screen>('setup');
   // Сессия тренировки
@@ -30,13 +28,18 @@ export function TrainingContent(_props: TrainingContentProps) {
   // Флаг «все слова освоены» (пустой массив после загрузки)
   const [allMastered, setAllMastered] = useState(false);
 
+  // isLoading нужен для блокировки кнопки «Начать» во время загрузки слов
+  const [isStarting, setIsStarting] = useState(false);
+
   const { refetch: fetchWords } = useTrainingWords(selectedSetId ?? undefined);
   const submitResult = useSubmitResult();
 
   /** Запустить тренировку: загрузить слова и перейти на экран карточек */
   async function handleStart() {
     setAllMastered(false);
+    setIsStarting(true);
     const result = await fetchWords();
+    setIsStarting(false);
     const words = result.data ?? [];
 
     if (words.length === 0) {
@@ -102,20 +105,15 @@ export function TrainingContent(_props: TrainingContentProps) {
     setScreen('training');
   }
 
-  // Заглушки для экранов (будут реализованы в Task 4–6)
   if (screen === 'setup') {
     return (
-      <div data-testid="setup-screen">
-        <p>Экран настройки тренировки (SetupScreen)</p>
-        <p>selectedSetId: {selectedSetId ?? 'null'}</p>
-        {allMastered && (
-          <p data-testid="all-mastered-message">Все слова освоены, выберите другой набор</p>
-        )}
-        <button onClick={() => setSelectedSetId(null)}>Все слова</button>
-        <button onClick={handleStart} data-testid="start-button">
-          Начать тренировку
-        </button>
-      </div>
+      <SetupScreen
+        selectedSetId={selectedSetId}
+        onSelectSet={setSelectedSetId}
+        onStart={handleStart}
+        allMastered={allMastered}
+        isLoading={isStarting}
+      />
     );
   }
 
