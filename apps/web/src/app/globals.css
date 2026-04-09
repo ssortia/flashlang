@@ -5,93 +5,145 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+  /* Geist Sans подключается через next/font и передаётся через CSS-переменную */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
 
+  /* Базовые цвета */
   --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-foreground: hsl(224 71% 4%);
   --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222.2 84% 4.9%);
-  --color-primary: hsl(222.2 47.4% 11.2%);
-  --color-primary-foreground: hsl(210 40% 98%);
-  --color-secondary: hsl(210 40% 96.1%);
-  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
-  --color-muted: hsl(210 40% 96.1%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
-  --color-accent: hsl(210 40% 96.1%);
-  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
-  --color-destructive: hsl(0 84.2% 60.2%);
-  --color-destructive-foreground: hsl(210 40% 98%);
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(222.2 84% 4.9%);
-  --radius: 0.5rem;
+  --color-card-foreground: hsl(224 71% 4%);
+
+  /* Primary — Indigo */
+  --color-primary: hsl(239 84% 67%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  /* Secondary */
+  --color-secondary: hsl(220 14% 96%);
+  --color-secondary-foreground: hsl(220 9% 46%);
+
+  /* Muted */
+  --color-muted: hsl(220 14% 96%);
+  --color-muted-foreground: hsl(220 9% 46%);
+
+  /* Accent — Violet */
+  --color-accent: hsl(262 83% 96%);
+  --color-accent-foreground: hsl(262 47% 34%);
+
+  /* Destructive — Rose */
+  --color-destructive: hsl(350 89% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  /* Semantic */
+  --color-success: hsl(158 64% 42%);
+  --color-success-foreground: hsl(0 0% 100%);
+  --color-warning: hsl(38 92% 50%);
+  --color-warning-foreground: hsl(0 0% 100%);
+  --color-info: hsl(199 89% 48%);
+  --color-info-foreground: hsl(0 0% 100%);
+
+  /* Border / Input / Ring */
+  --color-border: hsl(220 13% 91%);
+  --color-input: hsl(220 13% 91%);
+  --color-ring: hsl(239 84% 67%);
+
+  --radius: 0.625rem;
 }
 
 /*
- * shadcn-style CSS variables (without --color- prefix).
- * Required by @ssortia/shadcn-zod-bridge pre-compiled CSS which uses var(--destructive) etc.
+ * shadcn-style CSS variables (без --color- префикса).
+ * Требуется @ssortia/shadcn-zod-bridge, который использует var(--destructive) и т.д.
  */
 :root {
   --background: hsl(0 0% 100%);
-  --foreground: hsl(222.2 84% 4.9%);
+  --foreground: hsl(224 71% 4%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2 84% 4.9%);
-  --primary: hsl(222.2 47.4% 11.2%);
-  --primary-foreground: hsl(210 40% 98%);
-  --secondary: hsl(210 40% 96.1%);
-  --secondary-foreground: hsl(222.2 47.4% 11.2%);
-  --muted: hsl(210 40% 96.1%);
-  --muted-foreground: hsl(215.4 16.3% 46.9%);
-  --accent: hsl(210 40% 96.1%);
-  --accent-foreground: hsl(222.2 47.4% 11.2%);
-  --destructive: hsl(0 84.2% 60.2%);
-  --border: hsl(214.3 31.8% 91.4%);
-  --input: hsl(214.3 31.8% 91.4%);
-  --ring: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(224 71% 4%);
+  --primary: hsl(239 84% 67%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(220 14% 96%);
+  --secondary-foreground: hsl(220 9% 46%);
+  --muted: hsl(220 14% 96%);
+  --muted-foreground: hsl(220 9% 46%);
+  --accent: hsl(262 83% 96%);
+  --accent-foreground: hsl(262 47% 34%);
+  --destructive: hsl(350 89% 60%);
+  --border: hsl(220 13% 91%);
+  --input: hsl(220 13% 91%);
+  --ring: hsl(239 84% 67%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2 84% 4.9%);
-  --radius: 0.5rem;
+  --popover-foreground: hsl(224 71% 4%);
+  --radius: 0.625rem;
+
+  /* Токены уровней знания (0 — неизвестно, 5 — освоено) */
+  --knowledge-0: hsl(0 0% 65%);
+  --knowledge-1: hsl(38 92% 50%);
+  --knowledge-2: hsl(45 93% 47%);
+  --knowledge-3: hsl(84 81% 44%);
+  --knowledge-4: hsl(142 71% 45%);
+  --knowledge-5: hsl(158 64% 42%);
 }
 
 .dark {
-  --color-background: hsl(222.2 84% 4.9%);
-  --color-foreground: hsl(210 40% 98%);
-  --color-card: hsl(222.2 84% 4.9%);
-  --color-card-foreground: hsl(210 40% 98%);
-  --color-primary: hsl(210 40% 98%);
-  --color-primary-foreground: hsl(222.2 47.4% 11.2%);
-  --color-secondary: hsl(217.2 32.6% 17.5%);
-  --color-secondary-foreground: hsl(210 40% 98%);
-  --color-muted: hsl(217.2 32.6% 17.5%);
-  --color-muted-foreground: hsl(215 20.2% 65.1%);
-  --color-accent: hsl(217.2 32.6% 17.5%);
-  --color-accent-foreground: hsl(210 40% 98%);
-  --color-destructive: hsl(0 62.8% 30.6%);
-  --color-destructive-foreground: hsl(210 40% 98%);
-  --color-border: hsl(217.2 32.6% 17.5%);
-  --color-input: hsl(217.2 32.6% 17.5%);
-  --color-ring: hsl(212.7 26.8% 83.9%);
+  --color-background: hsl(224 71% 4%);
+  --color-foreground: hsl(213 31% 91%);
+  --color-card: hsl(224 71% 4%);
+  --color-card-foreground: hsl(213 31% 91%);
 
-  --background: hsl(222.2 84% 4.9%);
-  --foreground: hsl(210 40% 98%);
-  --card: hsl(222.2 84% 4.9%);
-  --card-foreground: hsl(210 40% 98%);
-  --primary: hsl(210 40% 98%);
-  --primary-foreground: hsl(222.2 47.4% 11.2%);
-  --secondary: hsl(217.2 32.6% 17.5%);
-  --secondary-foreground: hsl(210 40% 98%);
-  --muted: hsl(217.2 32.6% 17.5%);
-  --muted-foreground: hsl(215 20.2% 65.1%);
-  --accent: hsl(217.2 32.6% 17.5%);
-  --accent-foreground: hsl(210 40% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --border: hsl(217.2 32.6% 17.5%);
-  --input: hsl(217.2 32.6% 17.5%);
-  --ring: hsl(212.7 26.8% 83.9%);
-  --popover: hsl(222.2 84% 4.9%);
-  --popover-foreground: hsl(210 40% 98%);
+  /* Primary — Indigo (светлее для dark) */
+  --color-primary: hsl(239 84% 75%);
+  --color-primary-foreground: hsl(224 71% 4%);
+
+  --color-secondary: hsl(223 47% 11%);
+  --color-secondary-foreground: hsl(215 20% 65%);
+  --color-muted: hsl(223 47% 11%);
+  --color-muted-foreground: hsl(215 20% 65%);
+
+  /* Accent — Violet dark */
+  --color-accent: hsl(262 45% 12%);
+  --color-accent-foreground: hsl(262 83% 80%);
+
+  --color-destructive: hsl(350 89% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  --color-success: hsl(152 75% 60%);
+  --color-success-foreground: hsl(224 71% 4%);
+  --color-warning: hsl(43 96% 56%);
+  --color-warning-foreground: hsl(224 71% 4%);
+  --color-info: hsl(199 89% 60%);
+  --color-info-foreground: hsl(224 71% 4%);
+
+  --color-border: hsl(223 47% 11%);
+  --color-input: hsl(223 47% 11%);
+  --color-ring: hsl(239 84% 75%);
+
+  --background: hsl(224 71% 4%);
+  --foreground: hsl(213 31% 91%);
+  --card: hsl(224 71% 4%);
+  --card-foreground: hsl(213 31% 91%);
+  --primary: hsl(239 84% 75%);
+  --primary-foreground: hsl(224 71% 4%);
+  --secondary: hsl(223 47% 11%);
+  --secondary-foreground: hsl(215 20% 65%);
+  --muted: hsl(223 47% 11%);
+  --muted-foreground: hsl(215 20% 65%);
+  --accent: hsl(262 45% 12%);
+  --accent-foreground: hsl(262 83% 80%);
+  --destructive: hsl(350 89% 60%);
+  --border: hsl(223 47% 11%);
+  --input: hsl(223 47% 11%);
+  --ring: hsl(239 84% 75%);
+  --popover: hsl(224 71% 4%);
+  --popover-foreground: hsl(213 31% 91%);
+
+  /* Токены уровней знания в тёмной теме (чуть ярче) */
+  --knowledge-0: hsl(0 0% 45%);
+  --knowledge-1: hsl(38 92% 60%);
+  --knowledge-2: hsl(45 93% 57%);
+  --knowledge-3: hsl(84 81% 54%);
+  --knowledge-4: hsl(142 71% 55%);
+  --knowledge-5: hsl(152 75% 60%);
 }
 
 @layer base {
