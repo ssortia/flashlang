@@ -95,6 +95,24 @@ export const CreateWordSetDtoSchema = z.object({
 
 export type CreateWordSetDto = z.infer<typeof CreateWordSetDtoSchema>;
 
+// --- Training ---
+
+export const TrainingWordSchema = z.object({
+  id: z.string(),
+  word: z.string(),
+  translation: z.string(),
+  knowledgeLevel: z.number().int().min(0).max(5),
+});
+
+export type TrainingWord = z.infer<typeof TrainingWordSchema>;
+
+export const TrainingResultDtoSchema = z.object({
+  wordId: z.string(),
+  correct: z.boolean(),
+});
+
+export type TrainingResultDto = z.infer<typeof TrainingResultDtoSchema>;
+
 // --- TextListResponse ---
 
 export const TextListResponseSchema = z.object({

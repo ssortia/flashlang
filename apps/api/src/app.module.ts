@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { HealthModule } from './health/health.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TextsModule } from './texts/texts.module';
+import { TrainingModule } from './training/training.module';
 import { TranslationModule } from './translation/translation.module';
 import { UsersModule } from './users/users.module';
 import { VocabularyModule } from './vocabulary/vocabulary.module';
@@ -27,6 +28,7 @@ import { WordSetsModule } from './word-sets/word-sets.module';
     TranslationModule,
     VocabularyModule,
     WordSetsModule,
+    TrainingModule,
     HealthModule,
   ],
 })
