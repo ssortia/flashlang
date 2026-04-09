@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { Badge } from '@/components/ui/badge';
+import { KnowledgeBadge } from '@/components/knowledge-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import type { TrainingWord } from '@repo/types';
@@ -18,22 +18,6 @@ interface CardScreenProps {
   onAnswer: (correct: boolean) => void;
   /** Флаг ожидания мутации (блокирует кнопки «Знаю»/«Не знаю») */
   isPending: boolean;
-}
-
-/** Цвет индикатора уровня знания слова (0–5) */
-function getKnowledgeLevelColor(level: number): string {
-  if (level === 0) return 'bg-gray-400';
-  if (level === 1) return 'bg-red-500';
-  if (level === 2) return 'bg-orange-500';
-  if (level === 3) return 'bg-yellow-500';
-  if (level === 4) return 'bg-lime-500';
-  return 'bg-green-600';
-}
-
-/** Текстовое описание уровня знания слова */
-function getKnowledgeLevelLabel(level: number): string {
-  const labels = ['Не знаю', 'Начинающий', 'Знакомо', 'Хорошо', 'Отлично', 'Освоено'];
-  return labels[level] ?? String(level);
 }
 
 export function CardScreen({ word, currentIndex, total, onAnswer, isPending }: CardScreenProps) {
@@ -56,12 +40,7 @@ export function CardScreen({ word, currentIndex, total, onAnswer, isPending }: C
             {currentIndex + 1} из {total}
           </span>
           {/* Индикатор уровня знания */}
-          <Badge
-            className={`text-white ${getKnowledgeLevelColor(word.knowledgeLevel)}`}
-            data-testid="knowledge-level"
-          >
-            Уровень {word.knowledgeLevel}: {getKnowledgeLevelLabel(word.knowledgeLevel)}
-          </Badge>
+          <KnowledgeBadge level={word.knowledgeLevel} data-testid="knowledge-level" />
         </div>
 
         {/* Прогресс-бар */}

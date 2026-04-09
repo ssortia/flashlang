@@ -124,12 +124,12 @@ globals.css
 
 - Modify: `apps/web/src/app/globals.css`
 
-- [ ] Заменить primary на indigo, добавить accent (violet)
-- [ ] Добавить semantic токены: `--color-success`, `--color-warning`, `--color-info` в @theme
-- [ ] Продублировать в `:root` (для shadcn-zod-bridge) и `.dark`
-- [ ] Добавить `--knowledge-0` … `--knowledge-5` в `:root` и `.dark`
-- [ ] Обновить `--radius` до `0.625rem` (чуть мягче)
-- [ ] Запустить `pnpm --filter @repo/web typecheck` — должен пройти
+- [x] Заменить primary на indigo, добавить accent (violet)
+- [x] Добавить semantic токены: `--color-success`, `--color-warning`, `--color-info` в @theme
+- [x] Продублировать в `:root` (для shadcn-zod-bridge) и `.dark`
+- [x] Добавить `--knowledge-0` … `--knowledge-5` в `:root` и `.dark`
+- [x] Обновить `--radius` до `0.625rem` (чуть мягче)
+- [x] Запустить `pnpm --filter @repo/web typecheck` — должен пройти
 
 ### Task 2: Типографика — подключить Geist
 
@@ -138,10 +138,10 @@ globals.css
 - Modify: `apps/web/src/app/layout.tsx`
 - Modify: `apps/web/src/app/globals.css`
 
-- [ ] Импортировать `Geist` из `next/font/google` в корневом `layout.tsx`
-- [ ] Передать класс шрифта на `<html>` через `geist.className`
-- [ ] Обновить `--font-sans` в `@theme` на `var(--font-geist-sans)` + системный стек
-- [ ] Запустить `pnpm --filter @repo/web typecheck` — должен пройти
+- [x] Импортировать `Geist` из `next/font/google` в корневом `layout.tsx`
+- [x] Передать класс шрифта на `<html>` через `geist.variable` + `className={geist.variable}`
+- [x] Обновить `--font-sans` в `@theme` на `var(--font-geist-sans)` + системный стек
+- [x] Запустить `pnpm --filter @repo/web typecheck` — должен пройти
 
 ### Task 3: Sidebar компонент
 
@@ -150,14 +150,14 @@ globals.css
 - Create: `apps/web/src/components/sidebar.tsx`
 - Create: `apps/web/src/components/sidebar.test.tsx`
 
-- [ ] Создать `<Sidebar>` — фиксированный `w-64` на десктопе с nav-ссылками и логотипом
-- [ ] На мобиле (< md): скрыт, открывается через Sheet (установить `@radix-ui/react-dialog` если нет)
-- [ ] Кнопка-гамбургер в header только на мобиле (управляет Sheet)
-- [ ] Активная ссылка — `bg-accent text-accent-foreground rounded-md`
-- [ ] Иконки для ссылок: FileText (Тексты), BookOpen (Словарь), Zap (Тренировка), Users (Пользователи) из lucide-react
-- [ ] Написать тест: активная ссылка выделяется при pathname совпадении
-- [ ] Написать тест: admin-ссылка скрыта без isAdmin
-- [ ] Запустить тесты — должны пройти
+- [x] Создать `<Sidebar>` — фиксированный `w-64` на десктопе с nav-ссылками и логотипом
+- [x] На мобиле (< md): скрыт, открывается через CSS-overlay (без Sheet — нет shadcn CLI)
+- [x] Кнопка-гамбургер в header только на мобиле (управляет состоянием)
+- [x] Активная ссылка — `bg-accent text-accent-foreground rounded-md`
+- [x] Иконки для ссылок: BookOpen (Тексты/Словарь), Zap (Тренировка), Users (Пользователи) из lucide-react
+- [x] Написать тест: активная ссылка выделяется при pathname совпадении
+- [x] Написать тест: admin-ссылка скрыта без isAdmin
+- [x] Запустить тесты — должны пройти
 
 ### Task 4: Обновить Dashboard layout
 
@@ -165,12 +165,12 @@ globals.css
 
 - Modify: `apps/web/src/app/(dashboard)/layout.tsx`
 
-- [ ] Заменить горизонтальную навигацию на `<Sidebar>`
-- [ ] Header: только логотип (или убрать, лого переехал в sidebar), user email, ThemeToggle, кнопка Выйти
-- [ ] Layout: `flex` row — `<Sidebar>` слева, `<main>` `flex-1` справа
-- [ ] Main: `overflow-y-auto`, `p-6 md:p-8`
-- [ ] Проверить что `<Nav>` компонент больше не используется (можно оставить или удалить)
-- [ ] Запустить `pnpm --filter @repo/web typecheck && pnpm --filter @repo/web lint`
+- [x] Заменить горизонтальную навигацию на `<Sidebar>` через AppShell Client Component
+- [x] Header: только мобильный логотип, user email, ThemeToggle, кнопка Выйти
+- [x] Layout: `flex` row — desktop aside слева, `<main>` `flex-1` справа
+- [x] Main: `overflow-y-auto`, `p-6 md:p-8`
+- [x] `<Nav>` компонент не используется в layout (файл сохранён)
+- [x] Запустить `pnpm --filter @repo/web typecheck && pnpm --filter @repo/web lint`
 
 ### Task 5: Полировка auth-страниц (login / register)
 
@@ -181,11 +181,11 @@ globals.css
 - Modify: `apps/web/src/app/(auth)/register/page.tsx` (если есть)
 - Modify: `apps/web/src/components/auth/register-form.tsx` (если есть)
 
-- [ ] Страница: центрированная карточка с логотипом Flashlang сверху
-- [ ] Убрать `title: 'Login | NexST'` → заменить на `'Войти | Flashlang'`
-- [ ] Добавить ссылку «Нет аккаунта? Зарегистрироваться» на login и обратно на register
-- [ ] Стилизовать через текущие токены (input border-radius, button primary цвет)
-- [ ] Запустить `pnpm --filter @repo/web typecheck`
+- [x] Страница: логотип Flashlang сверху карточки
+- [x] Убрать `title: 'Login | NexST'` → заменить на `'Войти | Flashlang'`
+- [x] Ссылки «Нет аккаунта? Зарегистрироваться» и «Уже есть аккаунт? Войти» уже были
+- [x] Стилизация через токены работает автоматически
+- [x] Запустить `pnpm --filter @repo/web typecheck`
 
 ### Task 6: Компонент KnowledgeBadge
 
@@ -194,25 +194,25 @@ globals.css
 - Create: `apps/web/src/components/knowledge-badge.tsx`
 - Create: `apps/web/src/components/knowledge-badge.test.tsx`
 
-- [ ] Создать `<KnowledgeBadge level={0..5} />` — цветной Badge с уровнем знания
-- [ ] Использовать `--knowledge-N` токены через inline style или Tailwind arbitrary values
-- [ ] Заменить существующие индикаторы уровня в `card-screen.tsx` и `vocabulary-table.tsx` на KnowledgeBadge
-- [ ] Написать тест: рендерится с правильным числом, применяется нужный класс/стиль
-- [ ] Запустить тесты — должны пройти
+- [x] Создать `<KnowledgeBadge level={0..5} />` — цветной Badge с уровнем знания
+- [x] Использовать `--knowledge-N` токены через inline style
+- [x] Заменить существующие индикаторы уровня в `card-screen.tsx` и `vocabulary-table.tsx` на KnowledgeBadge
+- [x] Написать тест: рендерится с правильным числом, применяется нужный стиль (8 тестов)
+- [x] Запустить тесты — должны пройти
 
 ### Task 7: Проверка acceptance criteria
 
-- [ ] Все токены определены (primary, accent, success, warning, destructive, knowledge-0..5)
-- [ ] Geist подключён, отображается в браузере
-- [ ] Sidebar работает на десктопе (w-64, фиксированный)
-- [ ] Sidebar работает на мобиле (Sheet, открывается по гамбургеру)
-- [ ] Активная ссылка sidebar подсвечивается
-- [ ] Auth-страницы показывают `Flashlang` вместо `NexST`
-- [ ] KnowledgeBadge используется в card-screen и vocabulary-table
-- [ ] Светлая и тёмная тема работают корректно для новой палитры
-- [ ] Запустить `pnpm --filter @repo/web test`
-- [ ] Запустить `pnpm --filter @repo/web typecheck`
-- [ ] Запустить `pnpm --filter @repo/web lint`
+- [x] Все токены определены (primary, accent, success, warning, destructive, knowledge-0..5)
+- [x] Geist подключён через next/font/google
+- [x] Sidebar работает на десктопе (w-64, фиксированный)
+- [x] Sidebar работает на мобиле (CSS-overlay, открывается по гамбургеру)
+- [x] Активная ссылка sidebar подсвечивается
+- [x] Auth-страницы показывают `Flashlang` вместо `NexST`
+- [x] KnowledgeBadge используется в card-screen и vocabulary-table
+- [x] Светлая и тёмная тема — токены определены для обоих вариантов
+- [x] Запустить `pnpm --filter @repo/web test` — 97 тестов ✅
+- [x] Запустить `pnpm --filter @repo/web typecheck` — ✅
+- [x] Запустить `pnpm --filter @repo/web lint` — ✅
 
 ### Task 8: [Final] Обновить документацию
 

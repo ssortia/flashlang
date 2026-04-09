@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { BookOpen, Plus, Trash2 } from 'lucide-react';
 
+import { KnowledgeBadge } from '@/components/knowledge-badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -11,16 +12,6 @@ import { useDeleteWord, useVocabulary } from '../../../hooks/use-vocabulary';
 import { useAddWordToSet, useRemoveWordFromSet, useWordSets } from '../../../hooks/use-word-sets';
 
 import { AddWordDialog } from './add-word-dialog';
-
-const KNOWLEDGE_LABELS = ['Незнакомо', 'Видел', 'Сложно', 'Средне', 'Легко', 'Освоено'];
-const KNOWLEDGE_COLORS = [
-  'text-red-500',
-  'text-orange-500',
-  'text-yellow-500',
-  'text-blue-500',
-  'text-green-500',
-  'text-green-700',
-];
 
 interface VocabularyTableProps {
   selectedSetId: string | null;
@@ -88,11 +79,13 @@ export function VocabularyTable({ selectedSetId }: VocabularyTableProps) {
           className="border-input bg-background focus:ring-ring rounded-md border px-3 py-2 text-sm focus:ring-2"
         >
           <option value="">Все уровни</option>
-          {KNOWLEDGE_LABELS.map((label, i) => (
-            <option key={i} value={i}>
-              {i} — {label}
-            </option>
-          ))}
+          {(['Не знаю', 'Начинающий', 'Знакомо', 'Хорошо', 'Отлично', 'Освоено'] as const).map(
+            (label, i) => (
+              <option key={i} value={i}>
+                {i} — {label}
+              </option>
+            ),
+          )}
         </select>
         <span className="text-muted-foreground self-center text-sm">
           {isLoading ? '...' : `${total} слов`}
@@ -149,9 +142,7 @@ export function VocabularyTable({ selectedSetId }: VocabularyTableProps) {
                       <td className="px-4 py-3 font-medium">{word.word}</td>
                       <td className="text-muted-foreground px-4 py-3">{word.translation}</td>
                       <td className="px-4 py-3">
-                        <span className={KNOWLEDGE_COLORS[word.knowledgeLevel]}>
-                          {word.knowledgeLevel} — {KNOWLEDGE_LABELS[word.knowledgeLevel]}
-                        </span>
+                        <KnowledgeBadge level={word.knowledgeLevel} />
                       </td>
                       <td className="px-4 py-3">
                         {sets.length > 0 && (
