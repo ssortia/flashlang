@@ -139,13 +139,13 @@ interface TrainingSession {
 
 - Create: `apps/web/src/app/(dashboard)/training/training-content.tsx`
 
-- [ ] Локальное состояние: `screen: Screen`, `session: TrainingSession | null`, `selectedSetId: string | null`
-- [ ] Рендерить `<SetupScreen>` / `<CardScreen>` / `<ResultsScreen>` в зависимости от `screen` (заглушки на данном этапе)
-- [ ] Функция `handleStart()`: загрузить слова, если 0 — сообщение, иначе переход в `training`
-- [ ] Функция `handleAnswer(correct)`: POST result, обновить счётчики, перейти к следующей карточке или в `results`
-- [ ] Функция `handleRepeat()`: заново загрузить слова с тем же `setId`, переход в `training`
-- [ ] Написать unit-тесты: переходы setup→training→results, обработка пустого массива слов
-- [ ] Запустить тесты — должны пройти перед Task 4
+- [x] Локальное состояние: `screen: Screen`, `session: TrainingSession | null`, `selectedSetId: string | null`
+- [x] Рендерить `<SetupScreen>` / `<CardScreen>` / `<ResultsScreen>` в зависимости от `screen` (заглушки на данном этапе)
+- [x] Функция `handleStart()`: загрузить слова, если 0 — сообщение, иначе переход в `training`
+- [x] Функция `handleAnswer(correct)`: POST result, обновить счётчики, перейти к следующей карточке или в `results`
+- [x] Функция `handleRepeat()`: заново загрузить слова с тем же `setId`, переход в `training`
+- [x] Написать unit-тесты: переходы setup→training→results, обработка пустого массива слов
+- [x] Запустить тесты — должны пройти перед Task 4
 
 ### Task 4: Стартовый экран (SetupScreen)
 
