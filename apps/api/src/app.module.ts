@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { TextsModule } from './texts/texts.module';
 import { TranslationModule } from './translation/translation.module';
 import { UsersModule } from './users/users.module';
+import { VocabularyModule } from './vocabulary/vocabulary.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     TextsModule,
     TranslationModule,
+    VocabularyModule,
     HealthModule,
   ],
 })

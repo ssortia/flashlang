@@ -39,6 +39,44 @@ export const TranslationResponseSchema = z.object({
 
 export type TranslationResponse = z.infer<typeof TranslationResponseSchema>;
 
+// --- UserWord (Vocabulary) ---
+
+export const UserWordSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  textId: z.string().nullable(),
+  word: z.string(),
+  translation: z.string(),
+  knowledgeLevel: z.number().int().min(0).max(5),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+});
+
+export type UserWord = z.infer<typeof UserWordSchema>;
+
+export const CreateUserWordDtoSchema = z.object({
+  word: z.string().min(1).max(255),
+  translation: z.string().min(1),
+  knowledgeLevel: z.number().int().min(0).max(5).default(0),
+  textId: z.string().optional(),
+});
+
+export type CreateUserWordDto = z.infer<typeof CreateUserWordDtoSchema>;
+
+export const UpdateUserWordDtoSchema = z.object({
+  translation: z.string().min(1).optional(),
+  knowledgeLevel: z.number().int().min(0).max(5).optional(),
+});
+
+export type UpdateUserWordDto = z.infer<typeof UpdateUserWordDtoSchema>;
+
+export const VocabularyResponseSchema = z.object({
+  items: z.array(UserWordSchema),
+  total: z.number().int().nonnegative(),
+});
+
+export type VocabularyResponse = z.infer<typeof VocabularyResponseSchema>;
+
 // --- TextListResponse ---
 
 export const TextListResponseSchema = z.object({
