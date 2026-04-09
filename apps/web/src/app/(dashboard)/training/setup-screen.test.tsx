@@ -13,8 +13,20 @@ import { useWordSets } from '@/hooks/use-word-sets';
 
 // Тестовые данные наборов
 const MOCK_SETS: WordSet[] = [
-  { id: 'set-1', name: 'Базовый', wordCount: 10 },
-  { id: 'set-2', name: 'Продвинутый', wordCount: 5 },
+  {
+    id: 'set-1',
+    userId: 'user-1',
+    name: 'Базовый',
+    wordCount: 10,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'set-2',
+    userId: 'user-1',
+    name: 'Продвинутый',
+    wordCount: 5,
+    createdAt: new Date('2024-01-02'),
+  },
 ];
 
 // Дефолтные пропсы для рендера
@@ -66,7 +78,7 @@ describe('SetupScreen — рендер', () => {
     vi.mocked(useWordSets).mockReturnValue({
       data: [],
       isLoading: false,
-    } as ReturnType<typeof useWordSets>);
+    } as unknown as ReturnType<typeof useWordSets>);
 
     render(<SetupScreen {...defaultProps} />);
     // Опция «Все слова» всё равно присутствует

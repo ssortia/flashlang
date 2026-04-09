@@ -40,13 +40,13 @@ beforeEach(() => {
   // Дефолтные реализации моков
   vi.mocked(useTrainingWords).mockReturnValue({
     refetch: makeRefetch(MOCK_WORDS),
-  } as ReturnType<typeof useTrainingWords>);
+  } as unknown as ReturnType<typeof useTrainingWords>);
 
   // useWordSets нужен для SetupScreen — возвращаем пустой список в тестах контейнера
   vi.mocked(useWordSets).mockReturnValue({
     data: [],
     isLoading: false,
-  } as ReturnType<typeof useWordSets>);
+  } as unknown as ReturnType<typeof useWordSets>);
 
   vi.mocked(useSubmitResult).mockReturnValue({
     mutateAsync: makeMutateAsync(),
@@ -83,7 +83,7 @@ describe('TrainingContent — переходы между экранами', () 
   it('показывает сообщение «все освоены» если слова не пришли', async () => {
     vi.mocked(useTrainingWords).mockReturnValue({
       refetch: makeRefetch([]),
-    } as ReturnType<typeof useTrainingWords>);
+    } as unknown as ReturnType<typeof useTrainingWords>);
 
     render(<TrainingContent />);
 
@@ -119,7 +119,7 @@ describe('TrainingContent — переходы между экранами', () 
     // Только одно слово в сессии
     vi.mocked(useTrainingWords).mockReturnValue({
       refetch: makeRefetch([MOCK_WORDS[0]]),
-    } as ReturnType<typeof useTrainingWords>);
+    } as unknown as ReturnType<typeof useTrainingWords>);
 
     render(<TrainingContent />);
 
@@ -154,8 +154,8 @@ describe('TrainingContent — переходы между экранами', () 
     fireEvent.click(screen.getByTestId('dont-know-button'));
 
     await waitFor(() => {
-      expect(screen.getByTestId('correct-count')).toHaveTextContent('Знаю: 1');
-      expect(screen.getByTestId('incorrect-count')).toHaveTextContent('Не знаю: 1');
+      expect(screen.getByTestId('correct-count')).toHaveTextContent('1');
+      expect(screen.getByTestId('incorrect-count')).toHaveTextContent('1');
     });
   });
 
@@ -163,7 +163,7 @@ describe('TrainingContent — переходы между экранами', () 
     // Только одно слово
     vi.mocked(useTrainingWords).mockReturnValue({
       refetch: makeRefetch([MOCK_WORDS[0]]),
-    } as ReturnType<typeof useTrainingWords>);
+    } as unknown as ReturnType<typeof useTrainingWords>);
 
     render(<TrainingContent />);
 
@@ -194,7 +194,7 @@ describe('TrainingContent — переходы между экранами', () 
 
     vi.mocked(useTrainingWords).mockReturnValue({
       refetch: refetchMock,
-    } as ReturnType<typeof useTrainingWords>);
+    } as unknown as ReturnType<typeof useTrainingWords>);
 
     render(<TrainingContent />);
 
@@ -226,7 +226,7 @@ describe('TrainingContent — переходы между экранами', () 
     // Одно слово
     vi.mocked(useTrainingWords).mockReturnValue({
       refetch: makeRefetch([MOCK_WORDS[0]]),
-    } as ReturnType<typeof useTrainingWords>);
+    } as unknown as ReturnType<typeof useTrainingWords>);
 
     render(<TrainingContent />);
 

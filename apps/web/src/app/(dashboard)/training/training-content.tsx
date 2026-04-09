@@ -6,6 +6,7 @@ import { useSubmitResult, useTrainingWords } from '@/hooks/use-training';
 import type { TrainingWord } from '@repo/types';
 
 import { CardScreen } from './card-screen';
+import { ResultsScreen } from './results-screen';
 import { SetupScreen } from './setup-screen';
 
 // Типы экранов тренировки
@@ -133,17 +134,11 @@ export function TrainingContent() {
 
   if (screen === 'results' && session) {
     return (
-      <div data-testid="results-screen">
-        <p>Экран результатов (ResultsScreen)</p>
-        <p data-testid="correct-count">Знаю: {session.correct}</p>
-        <p data-testid="incorrect-count">Не знаю: {session.incorrect}</p>
-        <button onClick={handleRepeat} data-testid="repeat-button">
-          Повторить
-        </button>
-        <button onClick={() => setSelectedSetId(selectedSetId)} data-testid="to-vocabulary-button">
-          В словарь
-        </button>
-      </div>
+      <ResultsScreen
+        correct={session.correct}
+        incorrect={session.incorrect}
+        onRepeat={handleRepeat}
+      />
     );
   }
 
