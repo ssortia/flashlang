@@ -40,7 +40,7 @@ export function WordSetsPanel({ selectedSetId, onSelectSet }: WordSetsPanelProps
       <CardHeader className="pb-3">
         <CardTitle className="text-sm font-medium">Наборы слов</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-2">
+      <CardContent className="space-y-1 px-3 pb-3 pt-0">
         {/* Все слова */}
         <button
           onClick={() => onSelectSet(null)}

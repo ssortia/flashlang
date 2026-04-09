@@ -58,15 +58,8 @@ export function VocabularyTable({ selectedSetId }: VocabularyTableProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <Button size="sm" className="gap-2" onClick={() => setShowAdd(true)}>
-          <Plus className="h-4 w-4" />
-          Добавить слово
-        </Button>
-      </div>
-
-      {/* Фильтры */}
-      <div className="flex flex-wrap gap-3">
+      {/* Фильтры + кнопка в одну строку */}
+      <div className="flex flex-wrap items-center gap-3">
         <Input
           placeholder="Поиск по слову или переводу..."
           value={search}
@@ -87,9 +80,11 @@ export function VocabularyTable({ selectedSetId }: VocabularyTableProps) {
             ),
           )}
         </select>
-        <span className="text-muted-foreground self-center text-sm">
-          {isLoading ? '...' : `${total} слов`}
-        </span>
+        <span className="text-muted-foreground text-sm">{isLoading ? '...' : `${total} слов`}</span>
+        <Button size="sm" className="ml-auto gap-2" onClick={() => setShowAdd(true)}>
+          <Plus className="h-4 w-4" />
+          Добавить слово
+        </Button>
       </div>
 
       {isError && <p className="text-destructive text-sm">Не удалось загрузить словарь</p>}
