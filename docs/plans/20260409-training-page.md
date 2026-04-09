@@ -116,10 +116,10 @@ interface TrainingSession {
 
 - Create: `apps/web/src/api/training.api.ts`
 
-- [ ] Создать `trainingApi.getWords(accessToken, params?)` — GET `/training/words` (с опциональными `setId` и `limit`)
-- [ ] Создать `trainingApi.submitResult(data, accessToken)` — POST `/training/result`
-- [ ] Написать unit-тесты: проверить формирование URL и параметров запроса
-- [ ] Запустить тесты — должны пройти перед Task 2
+- [x] Создать `trainingApi.getWords(accessToken, params?)` — GET `/training/words` (с опциональными `setId` и `limit`)
+- [x] Создать `trainingApi.submitResult(data, accessToken)` — POST `/training/result`
+- [x] Написать unit-тесты: проверить формирование URL и параметров запроса
+- [x] Запустить тесты — должны пройти перед Task 2
 
 ### Task 2: React Query хуки
 
