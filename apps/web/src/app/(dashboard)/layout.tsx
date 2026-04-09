@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { RoleProvider } from '@/components/auth/role-provider';
+import { Nav } from '@/components/nav';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 import { auth, signOut } from '../../auth';
@@ -21,15 +22,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
         <header className="border-b">
           <div className="container mx-auto flex h-16 items-center justify-between px-4">
             <div className="flex items-center gap-6">
-              <h1 className="text-xl font-semibold">NexST</h1>
-              {isAdmin && (
-                <Link
-                  href="/admin/users"
-                  className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                >
-                  Пользователи
-                </Link>
-              )}
+              <Link
+                href="/texts"
+                className="text-xl font-semibold transition-opacity hover:opacity-80"
+              >
+                Flashlang
+              </Link>
+              <Nav isAdmin={isAdmin} />
             </div>
             <div className="flex items-center gap-4">
               <ThemeToggle />
