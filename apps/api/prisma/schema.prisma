@@ -21,7 +21,73 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  texts     Text[]
+  words     UserWord[]
+  wordSets  WordSet[]
+
   @@index([role])
   @@index([createdAt])
   @@map("users")
+}
+
+model Text {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  words UserWord[]
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("texts")
+}
+
+// Уровни знания: 0 — незнакомо, 1 — видел, 2 — сложно, 3 — средне, 4 — легко, 5 — освоено
+model UserWord {
+  id             String   @id @default(cuid())
+  userId         String
+  textId         String?
+  word           String
+  translation    String
+  knowledgeLevel Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text     Text?            @relation(fields: [textId], references: [id], onDelete: SetNull)
+  wordSets UserWordOnSet[]
+
+  @@unique([userId, word])
+  @@index([userId, knowledgeLevel])
+  @@index([createdAt])
+  @@map("user_words")
+}
+
+model WordSet {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  createdAt DateTime @default(now())
+
+  user  User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  words UserWordOnSet[]
+
+  @@index([userId])
+  @@map("word_sets")
+}
+
+// Join-таблица many-to-many: слово ↔ набор
+model UserWordOnSet {
+  wordId    String
+  setId     String
+  createdAt DateTime @default(now())
+
+  word UserWord @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  set  WordSet  @relation(fields: [setId], references: [id], onDelete: Cascade)
+
+  @@id([wordId, setId])
+  @@map("user_word_on_set")
 }
