@@ -37,10 +37,10 @@ export function WordSetsPanel({ selectedSetId, onSelectSet }: WordSetsPanelProps
 
   return (
     <Card className="h-fit">
-      <CardHeader className="pb-3">
+      <CardHeader className="p-4 px-6">
         <CardTitle className="text-sm font-medium">Наборы слов</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-1 px-3 pb-3 pt-0">
+      <CardContent className="space-y-1 p-0 px-3 pb-3 pt-0">
         {/* Все слова */}
         <button
           onClick={() => onSelectSet(null)}
@@ -93,7 +93,7 @@ export function WordSetsPanel({ selectedSetId, onSelectSet }: WordSetsPanelProps
         )}
 
         {/* Форма создания набора */}
-        <form onSubmit={handleCreate} className="flex gap-1.5 pt-2">
+        <form onSubmit={handleCreate} className="flex gap-1.5 py-3">
           <Input
             value={newSetName}
             onChange={(e) => setNewSetName(e.target.value)}
