@@ -104,11 +104,11 @@ interface TrainingSession {
 - Create: `apps/web/vitest.config.ts`
 - Create: `apps/web/vitest.setup.ts`
 
-- [ ] Установить `vitest`, `@testing-library/react`, `@testing-library/user-event`, `@vitejs/plugin-react`, `jsdom` в devDependencies `apps/web`
-- [ ] Создать `apps/web/vitest.config.ts` с окружением jsdom и путём к setup-файлу
-- [ ] Создать `apps/web/vitest.setup.ts` (импорт `@testing-library/jest-dom`)
-- [ ] Добавить скрипт `"test": "vitest run"` в `apps/web/package.json`
-- [ ] Запустить `pnpm --filter @repo/web test` — убедиться что фреймворк работает
+- [x] Установить `vitest`, `@testing-library/react`, `@testing-library/user-event`, `@vitejs/plugin-react`, `jsdom` в devDependencies `apps/web`
+- [x] Создать `apps/web/vitest.config.ts` с окружением jsdom и путём к setup-файлу
+- [x] Создать `apps/web/vitest.setup.ts` (импорт `@testing-library/jest-dom`)
+- [x] Добавить скрипт `"test": "vitest run"` в `apps/web/package.json`
+- [x] Запустить `pnpm --filter @repo/web test` — убедиться что фреймворк работает
 
 ### Task 1: API client для тренировки
 
