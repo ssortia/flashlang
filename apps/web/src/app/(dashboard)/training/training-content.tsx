@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useSubmitResult, useTrainingWords } from '@/hooks/use-training';
 import type { TrainingWord } from '@repo/types';
 
+import { CardScreen } from './card-screen';
 import { SetupScreen } from './setup-screen';
 
 // Типы экранов тренировки
@@ -120,19 +121,13 @@ export function TrainingContent() {
   if (screen === 'training' && session) {
     const currentWord = session.words[session.currentIndex];
     return (
-      <div data-testid="card-screen">
-        <p>Экран карточки (CardScreen)</p>
-        <p data-testid="current-word">{currentWord.word}</p>
-        <p>
-          Карточка {session.currentIndex + 1} из {session.words.length}
-        </p>
-        <button onClick={() => handleAnswer(true)} data-testid="know-button">
-          Знаю
-        </button>
-        <button onClick={() => handleAnswer(false)} data-testid="dont-know-button">
-          Не знаю
-        </button>
-      </div>
+      <CardScreen
+        word={currentWord}
+        currentIndex={session.currentIndex}
+        total={session.words.length}
+        onAnswer={handleAnswer}
+        isPending={submitResult.isPending}
+      />
     );
   }
 

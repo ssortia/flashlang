@@ -106,6 +106,8 @@ describe('TrainingContent — переходы между экранами', () 
       expect(screen.getByTestId('current-word')).toHaveTextContent('apple');
     });
 
+    // Открываем перевод перед ответом
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('know-button'));
 
     await waitFor(() => {
@@ -127,6 +129,8 @@ describe('TrainingContent — переходы между экранами', () 
       expect(screen.getByTestId('card-screen')).toBeInTheDocument();
     });
 
+    // Открываем перевод перед ответом
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('know-button'));
 
     await waitFor(() => {
@@ -141,10 +145,12 @@ describe('TrainingContent — переходы между экранами', () 
 
     // Первое слово — знаю
     await waitFor(() => expect(screen.getByTestId('current-word')).toHaveTextContent('apple'));
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('know-button'));
 
     // Второе слово — не знаю
     await waitFor(() => expect(screen.getByTestId('current-word')).toHaveTextContent('banana'));
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('dont-know-button'));
 
     await waitFor(() => {
@@ -165,6 +171,8 @@ describe('TrainingContent — переходы между экранами', () 
 
     await waitFor(() => expect(screen.getByTestId('card-screen')).toBeInTheDocument());
 
+    // Открываем перевод перед ответом
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('know-button'));
 
     await waitFor(() => expect(screen.getByTestId('results-screen')).toBeInTheDocument());
@@ -194,7 +202,8 @@ describe('TrainingContent — переходы между экранами', () 
     fireEvent.click(screen.getByTestId('start-button'));
     await waitFor(() => expect(screen.getByTestId('card-screen')).toBeInTheDocument());
 
-    // Отвечаем на единственное слово
+    // Открываем перевод и отвечаем на единственное слово
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('know-button'));
     await waitFor(() => expect(screen.getByTestId('results-screen')).toBeInTheDocument());
 
@@ -224,6 +233,8 @@ describe('TrainingContent — переходы между экранами', () 
     fireEvent.click(screen.getByTestId('start-button'));
     await waitFor(() => expect(screen.getByTestId('card-screen')).toBeInTheDocument());
 
+    // Открываем перевод перед ответом
+    fireEvent.click(screen.getByTestId('show-translation-button'));
     fireEvent.click(screen.getByTestId('know-button'));
 
     await waitFor(() => {
