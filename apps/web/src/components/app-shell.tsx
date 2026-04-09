@@ -23,7 +23,7 @@ export function AppShell({ isAdmin, email, themeToggle, signOutForm, children }:
   return (
     <div className="bg-background flex min-h-screen">
       {/* Desktop sidebar */}
-      <aside className="bg-card hidden w-64 shrink-0 border-r md:block">
+      <aside className="bg-card w-64 shrink-0 border-r max-md:hidden">
         <SidebarNav isAdmin={isAdmin} />
       </aside>
 
@@ -33,16 +33,15 @@ export function AppShell({ isAdmin, email, themeToggle, signOutForm, children }:
       {/* Основная область */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <header className="flex h-16 shrink-0 items-center border-b px-4 md:px-6">
-          {/* Гамбургер + лого на мобиле */}
-          <div className="flex items-center gap-3 md:hidden">
+          {/* Гамбургер — только на мобиле (сайдбар скрыт) */}
+          <div className="hidden items-center max-md:flex">
             <MobileMenuButton onClick={() => setMobileOpen(true)} />
-            <span className="text-primary text-lg font-bold">Flashlang</span>
           </div>
 
           {/* Правая часть header */}
           <div className="ml-auto flex items-center gap-4">
             {themeToggle}
-            <span className="text-muted-foreground hidden text-sm sm:block">{email}</span>
+            <span className="text-muted-foreground text-sm max-sm:hidden">{email}</span>
             {signOutForm}
           </div>
         </header>
