@@ -127,11 +127,11 @@ interface TrainingSession {
 
 - Create: `apps/web/src/hooks/use-training.ts`
 
-- [ ] `useTrainingWords(setId?, options?)` — загрузить слова для тренировки; `enabled: false` по умолчанию (запускается через `refetch`)
-- [ ] `useSubmitResult()` — мутация для POST `/training/result`
-- [ ] Примечание: `useWordSets()` из `apps/web/src/hooks/use-word-sets.ts` переиспользуем как есть, без изменений
-- [ ] Написать unit-тесты для новых хуков (мок fetch, проверить вызовы API)
-- [ ] Запустить тесты — должны пройти перед Task 3
+- [x] `useTrainingWords(setId?, options?)` — загрузить слова для тренировки; `enabled: false` по умолчанию (запускается через `refetch`)
+- [x] `useSubmitResult()` — мутация для POST `/training/result`
+- [x] Примечание: `useWordSets()` из `apps/web/src/hooks/use-word-sets.ts` переиспользуем как есть, без изменений
+- [x] Написать unit-тесты для новых хуков (мок fetch, проверить вызовы API)
+- [x] Запустить тесты — должны пройти перед Task 3
 
 ### Task 3: Основной контейнер (TrainingContent) — скелет с переключением экранов
 
