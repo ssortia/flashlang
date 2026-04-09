@@ -8,6 +8,7 @@ import { TextsModule } from './texts/texts.module';
 import { TranslationModule } from './translation/translation.module';
 import { UsersModule } from './users/users.module';
 import { VocabularyModule } from './vocabulary/vocabulary.module';
+import { WordSetsModule } from './word-sets/word-sets.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { VocabularyModule } from './vocabulary/vocabulary.module';
     TextsModule,
     TranslationModule,
     VocabularyModule,
+    WordSetsModule,
     HealthModule,
   ],
 })

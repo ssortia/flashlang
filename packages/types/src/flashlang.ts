@@ -77,6 +77,24 @@ export const VocabularyResponseSchema = z.object({
 
 export type VocabularyResponse = z.infer<typeof VocabularyResponseSchema>;
 
+// --- WordSet ---
+
+export const WordSetSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  name: z.string(),
+  wordCount: z.number().int().nonnegative(),
+  createdAt: z.coerce.date(),
+});
+
+export type WordSet = z.infer<typeof WordSetSchema>;
+
+export const CreateWordSetDtoSchema = z.object({
+  name: z.string().min(1).max(255),
+});
+
+export type CreateWordSetDto = z.infer<typeof CreateWordSetDtoSchema>;
+
 // --- TextListResponse ---
 
 export const TextListResponseSchema = z.object({
